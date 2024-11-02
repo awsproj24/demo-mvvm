@@ -1,4 +1,7 @@
+//package com.example.demo_mvvm.main
+
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -11,15 +14,24 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 
 @Composable
+fun MainWindow(mvvmViewModel: MvvmViewModel) {
+    var text by remember { mutableStateOf("Hello, World!") }
+    Button(onClick = {
+        text = "Hello, Desktop!"
+    }) {
+        Text(text)
+    }
+}
+
+@Composable
 @Preview
 fun App() {
-    var text by remember { mutableStateOf("Hello, World!") }
+    val answerService = remember { AnswerService() }
+    val mvvmViewModel = remember { MvvmViewModel(answerService) }
 
     MaterialTheme {
-        Button(onClick = {
-            text = "Hello, Desktop!"
-        }) {
-            Text(text)
+        Column {
+            MainWindow(mvvmViewModel = mvvmViewModel)
         }
     }
 }
