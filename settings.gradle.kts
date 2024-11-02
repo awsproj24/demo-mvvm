@@ -14,3 +14,4 @@ pluginManagement {
 }
 
 rootProject.name = "demo-mvvm"
+include("demo_mvvm_app")
