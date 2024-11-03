@@ -1,7 +1,7 @@
 //package com.example.demo_mvvm.viewmodel
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +14,7 @@ class MvvmViewModel(
     private val answerService: AnswerService,
 ) {
 
-    private val coroutineScope = MainScope()
+    private val coroutineScope = CoroutineScope(Dispatchers.Default)//MainScope()
 
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
@@ -28,17 +28,31 @@ class MvvmViewModel(
     val navigateToResults = _navigateToResults.receiveAsFlow()
 
     fun confirmAnswer(answer: String) {
+        // the launch failed with the MainScope():
+        // Module with the Main dispatcher is missing. Add dependency providing
+        // the Main dispatcher, e.g. 'kotlinx-coroutines-android' and ensure
+        // it has the same version as 'kotlinx-coroutines-core'
         coroutineScope.launch {
             _isLoading.value = true
             withContext(Dispatchers.IO) { answerService.save(answer) }
-            val text = if (answer == "Nacho cheese") {
+            val is_ok: Boolean = answer == "Nacho cheese"
+            val text = if (is_ok) {
                 "You've heard too many cheese jokes"
             } else {
                 "Nacho cheese"
             }
             _textToDisplay.emit(text)
-            _navigateToResults.send(true)
+            _navigateToResults.send(is_ok)
             _isLoading.value = false
+        }
+
+        coroutineScope.launch {
+            val text = if (answer == "Nacho cheese") {
+                "You've heard too many cheese jokes - preview"
+            } else {
+                "Nacho cheese - preview"
+            }
+            _textToDisplay.emit(text)
         }
     }
 }

@@ -14,10 +14,11 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 
 @Composable
-fun MainWindow(mvvmViewModel: MvvmViewModel) {
+fun MainWindow(mvvmViewModel: MvvmViewModel, changeCount: Int, onChange: ()->Unit) {
     var text by remember { mutableStateOf("Hello, World!") }
     Button(onClick = {
-        text = "Hello, Desktop!"
+        text = "Hello, Desktop! " + changeCount.toString()
+        onChange()
     }) {
         Text(text)
     }
@@ -31,7 +32,11 @@ fun App() {
 
     MaterialTheme {
         Column {
-            MainWindow(mvvmViewModel = mvvmViewModel)
+            var app_reset_count by remember { mutableStateOf(0) }
+            MainWindow(mvvmViewModel = mvvmViewModel, changeCount = app_reset_count,
+                onChange = { app_reset_count++ }
+            )
+            MvvmApp(mvvmViewModel = mvvmViewModel, appResetCount = app_reset_count)
         }
     }
 }
