@@ -4,4 +4,18 @@ project created by
   intellij idea 2024.1.4
   compose for desktop
 
+project attributes
+
+  build.gradle.kts:
+    group = "com.example.mvvm_grp"
+    packageName = "demo-mvvm"
+
+
+module service created by
+
+  new module -> Kotlin: 
+    Name: demo_mvvm_service
+    GroupId: com.example.mvvm_svc_grp
+    ArtifactId: demo_mvvm_service
+
 
