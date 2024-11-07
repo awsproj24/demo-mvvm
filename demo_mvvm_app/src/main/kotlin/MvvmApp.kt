@@ -1,4 +1,4 @@
-//package com.example.demo_mvvm.mvvmapp
+package com.example.mvvm_grp
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

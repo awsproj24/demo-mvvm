@@ -1,5 +1,6 @@
-//package com.example.demo_mvvm.viewmodel
+package com.example.mvvm_grp
 
+import com.example.mvvm_grp.mvvm_svc.AnswerService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel

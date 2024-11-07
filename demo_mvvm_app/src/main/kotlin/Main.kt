@@ -1,4 +1,4 @@
-//package com.example.demo_mvvm.main
+//package com.example.mvvm_grp
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -12,6 +12,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import com.example.mvvm_grp.MvvmApp
+import com.example.mvvm_grp.MvvmViewModel
+import com.example.mvvm_grp.mvvm_svc.AnswerService
+
 
 @Composable
 fun MainWindow(mvvmViewModel: MvvmViewModel, changeCount: Int, onChange: ()->Unit) {
