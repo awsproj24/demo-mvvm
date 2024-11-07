@@ -14,16 +14,25 @@ class MvvmViewModel(
     private val answerService: AnswerService,
 ) {
 
+    /* coroutine scope */
     private val coroutineScope = CoroutineScope(Dispatchers.Default)//MainScope()
 
+    /* state-flow */
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
 
+    /* state-flow */
     private val _textToDisplay: MutableStateFlow<String> = MutableStateFlow("")
     val textToDisplay = _textToDisplay.asStateFlow()
 
-    // See https://proandroiddev.com/android-singleliveevent-redux-with-kotlin-flow-b755c70bb055
-    // For why channel > SharedFlow/StateFlow in this case
+    /* channel flow */
+    // See proandroiddev.com/android-singleliveevent-redux-with-kotlin-flow-b755c70bb055
+    //  of 2021, for why channel > SharedFlow/StateFlow in this case
+    // Update 2022: github.com/Kotlin/kotlinx.coroutines/issues/2886
+    //  Due to the prompt cancellation guarantee changes that landed in Coroutines 1.4,
+    //  Channels cannot be used as mechanism that guarantees delivery and acknowledges
+    //  successful processing between producer and consumer in order to guarantee
+    //  that an item was handled exactly once.
     private val _navigateToResults = Channel<Boolean>(Channel.BUFFERED)
     val navigateToResults = _navigateToResults.receiveAsFlow()
 

@@ -26,10 +26,7 @@ fun MainWindow(mvvmViewModel: MvvmViewModel, changeCount: Int, onChange: ()->Uni
 
 @Composable
 @Preview
-fun App() {
-    val answerService = remember { AnswerService() }
-    val mvvmViewModel = remember { MvvmViewModel(answerService) }
-
+fun App(answerService: AnswerService, mvvmViewModel: MvvmViewModel) {
     MaterialTheme {
         Column {
             var app_reset_count by remember { mutableStateOf(0) }
@@ -42,7 +39,9 @@ fun App() {
 }
 
 fun main() = application {
+    val answerService = AnswerService()
+    val mvvmViewModel = MvvmViewModel(answerService)
     Window(onCloseRequest = ::exitApplication) {
-        App()
+        App(answerService = answerService, mvvmViewModel = mvvmViewModel)
     }
 }

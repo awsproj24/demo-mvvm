@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.onEach
 
 /* example app, view-model, answer-service from
  * medium.com/mobile-at-octopus-energy/architecture-in-jetpack-compose-mvp-mvvm-mvi-17d8170a13fd
+ *  written on Mar 1, 2021
  */
 
 
