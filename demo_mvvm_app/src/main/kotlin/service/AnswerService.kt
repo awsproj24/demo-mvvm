@@ -1,4 +1,4 @@
-package com.example.mvvm_grp.mvvm_svc
+package com.example.mvvm_demo.mvvm_svc
 
 import kotlinx.coroutines.delay
 

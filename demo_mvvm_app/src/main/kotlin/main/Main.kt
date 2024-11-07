@@ -12,9 +12,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import com.example.mvvm_demo.mvvm_svc.AnswerService
 import com.example.mvvm_grp.MvvmApp
 import com.example.mvvm_grp.MvvmViewModel
-import com.example.mvvm_grp.mvvm_svc.AnswerService
 
 
 @Composable
